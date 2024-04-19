@@ -1,4 +1,4 @@
-use cosmwasm_std::{to_binary, Deps};
+use cosmwasm_std::{to_json_binary, Deps};
 
 use crate::{
     core::{aliases::ProvQueryResponse, msg::QueryOwnerResponse},
@@ -19,7 +19,7 @@ pub fn handle(deps: Deps) -> ProvQueryResponse {
     let res = QueryOwnerResponse {
         owner: storage::state::get_owner(deps.storage)?,
     };
-    Ok(to_binary(&res)?)
+    Ok(to_json_binary(&res)?)
 }
 
 #[cfg(test)]

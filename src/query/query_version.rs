@@ -1,4 +1,4 @@
-use cosmwasm_std::{to_binary, Deps};
+use cosmwasm_std::{to_json_binary, Deps};
 use cw2::get_contract_version;
 
 use crate::core::{aliases::ProvQueryResponse, msg::QueryVersionResponse};
@@ -17,7 +17,7 @@ pub fn handle(deps: Deps) -> ProvQueryResponse {
     let res = QueryVersionResponse {
         contract_version: get_contract_version(deps.storage)?,
     };
-    Ok(to_binary(&res)?)
+    Ok(to_json_binary(&res)?)
 }
 
 #[cfg(test)]
