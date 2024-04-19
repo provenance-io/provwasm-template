@@ -21,7 +21,7 @@ pub fn assess_custom_fee<S: Into<String>>(
     };
 
     Ok(MsgAssessCustomMsgFeeRequest {
-        name: name.map(|s| s.into()).unwrap_or_else(|| "".to_string()),
+        name: name.map(|s| s.into()).unwrap_or_default(),
         amount: Some(coin),
         recipient: recipient.unwrap_or_else(|| Addr::unchecked("")).to_string(),
         from: validate_address(from)?.to_string(),
