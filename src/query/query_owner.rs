@@ -24,7 +24,7 @@ pub fn handle(deps: Deps) -> ProvQueryResponse {
 
 #[cfg(test)]
 mod tests {
-    use cosmwasm_std::{from_binary, Addr};
+    use cosmwasm_std::{from_json, Addr};
     use provwasm_mocks::mock_provenance_dependencies;
 
     use crate::{
@@ -39,7 +39,7 @@ mod tests {
         let mut deps = mock_provenance_dependencies();
         setup::mock_contract(deps.as_mut());
         let bin = handle(deps.as_ref()).unwrap();
-        let response: QueryOwnerResponse = from_binary(&bin).unwrap();
+        let response: QueryOwnerResponse = from_json(&bin).unwrap();
         assert_eq!(Addr::unchecked(OWNER), response.owner);
     }
 }

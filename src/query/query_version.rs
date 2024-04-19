@@ -22,7 +22,7 @@ pub fn handle(deps: Deps) -> ProvQueryResponse {
 
 #[cfg(test)]
 mod tests {
-    use cosmwasm_std::from_binary;
+    use cosmwasm_std::from_json;
     use provwasm_mocks::mock_provenance_dependencies;
 
     use crate::{
@@ -40,7 +40,7 @@ mod tests {
         let mut deps = mock_provenance_dependencies();
         setup::mock_contract(deps.as_mut());
         let bin = handle(deps.as_ref()).unwrap();
-        let response: QueryVersionResponse = from_binary(&bin).unwrap();
+        let response: QueryVersionResponse = from_json(&bin).unwrap();
         assert_eq!(CONTRACT_NAME, response.contract_version.contract);
         assert_eq!(CONTRACT_VERSION, response.contract_version.version);
     }
